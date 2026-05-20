@@ -24,6 +24,22 @@ export async function fetchWeatherByCoords(
   return response.data;
 }
 
+export async function fetchCityByCoords(
+  lat: number,
+  lon: number,
+): Promise<CitySuggestion[]> {
+  const response = await axios.get<CitySuggestion[]>(`${API_GEO_URL}/reverse`, {
+    params: {
+      lat,
+      lon,
+      limit: 1,
+      appid: API_KEY,
+    },
+  });
+
+  return response.data;
+}
+
 export async function fetchCitySuggestions(
   query: string,
 ): Promise<CitySuggestion[]> {
